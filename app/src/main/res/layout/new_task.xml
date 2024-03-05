@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/newTaskText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="Nueva Tarea"
+        android:minHeight="48dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNewTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newTaskText"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_alignParentEnd="true"
+        android:text="@string/save"
+        android:textAllCaps="false"
+         />
+
+
+</RelativeLayout>

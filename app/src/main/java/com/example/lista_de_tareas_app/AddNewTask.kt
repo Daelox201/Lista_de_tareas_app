@@ -1,5 +1,6 @@
 package com.example.lista_de_tareas_app
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -115,6 +116,7 @@ class AddNewTask : BottomSheetDialogFragment() {
 
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         val activity = activity

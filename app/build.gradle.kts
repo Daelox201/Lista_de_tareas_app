@@ -47,7 +47,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //Implementar recycleview
-
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     //Implementar una herramienta para los botones flotantes

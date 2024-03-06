@@ -1,8 +1,8 @@
 package com.example.lista_de_tareas_app.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +17,8 @@ import com.example.lista_de_tareas_app.AddNewTask
 class ToDoAdapter(private val db: DatabaseHandler, private val activity: MainActivity) :
     RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
 
-    private var todoList: List<ToDoModel> = listOf()
+    private var todoList: List<ToDoModel> = mutableListOf()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.task_layout, parent, false)
@@ -25,9 +26,11 @@ class ToDoAdapter(private val db: DatabaseHandler, private val activity: MainAct
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        db.OpenDatabase()
+
         val item = todoList[position]
         holder.task.text = item.task
-        holder.task.isChecked = item.status != 0
+        holder.task.isChecked = toBoolean(item.status)
         holder.task.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 db.updateStatus(item.id, 1)
@@ -37,11 +40,19 @@ class ToDoAdapter(private val db: DatabaseHandler, private val activity: MainAct
         }
     }
 
-    override fun getItemCount(): Int = todoList.size
-    fun getContext(): Context{
+    private fun toBoolean(n: Int): Boolean {
+        return n != 0
+    }
+
+    override fun getItemCount(): Int {
+        return todoList.size
+    }
+
+    fun getContext(): Context {
         return activity
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setTasks(todoList: List<ToDoModel>) {
         this.todoList = todoList
         notifyDataSetChanged()
@@ -66,8 +77,7 @@ class ToDoAdapter(private val db: DatabaseHandler, private val activity: MainAct
         fragment.show(activity.supportFragmentManager, AddNewTask.TAG)
     }
 
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val task: CheckBox = view.findViewById(R.id.todoCheckBox)
+        var task: CheckBox = view.findViewById(R.id.todoCheckBox) // Cambiado según especificación
     }
 }
